@@ -4,7 +4,7 @@
 
     <agm-marker *ngFor="let m of citys; let i = index"
       (mouseOver)="markerHover($event, i)" (mouseOut)="markerLeave($event, i)"
-      (markerClick)="markerClicked($event, i)"
+      (markerClick)="markerClicked($event, m.cityName)"
       [latitude]="m.lat" [longitude]="m.lng">
 
       <agm-info-window [isOpen]="m.isOpen">

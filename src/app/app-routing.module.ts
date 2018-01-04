@@ -8,7 +8,7 @@ import { MapComponent } from './components/map/map.component';
 const routes: Routes = [
   { path: '', redirectTo: "map/" , pathMatch: 'full' },
   { path: 'map/', component: MapComponent },
-  { path: 'plot/:id', component: PlotComponent }
+  { path: 'plot/:name', component: PlotComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { Observable } from 'rxjs/Observable';
 
 import { WeatherService } from '../../services/weather.service';
 import { Weather } from '../../models/weather';
@@ -12,6 +13,9 @@ import { MouseEvent } from '@agm/core';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+
+  constructor(private weatherService: WeatherService, private router: Router) {}
+
   title = 'Weather app';
   mapLat: number = 23.5;
   mapLng: number = 121.0;
@@ -34,10 +38,6 @@ export class MapComponent implements OnInit {
       isOpen: false
     }
   ];
-
-  constructor(
-    private weatherService: WeatherService,
-    private router: Router) {}
 
   ngOnInit() {
     this.getCurreentConditions("Taipei");
@@ -94,8 +94,8 @@ export class MapComponent implements OnInit {
     this.citys[index].isOpen = false;
   }
 
-  markerClicked($event: MouseEvent, index: number)
+  markerClicked($event: MouseEvent, cityName: string)
   {
-    this.router.navigate(['plot/' + index]);
+    this.router.navigate(['plot/' + cityName]);
   }
 }
