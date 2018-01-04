@@ -1,6 +1,15 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
-  <!--<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
+<agm-map [latitude]="mapLat" [longitude]="mapLng" (mapClick)="mapClicked($event)">
+
+  <agm-marker *ngFor="let m of citys"
+    [latitude]="m.lat" [longitude]="m.lng">
+
+    <agm-info-window>
+      <h2>{{m.cityName}}</h2>
+      <p>Temp: {{m.temp_c}} &deg;C</p>
+      <p>Wind speed: {{m.wind_kph}} km/h</p>
+    </agm-info-window>
+  </agm-marker>
 </agm-map>
 
