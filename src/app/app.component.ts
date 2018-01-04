@@ -21,14 +21,16 @@ export class AppComponent implements OnInit {
       temp_c: "N/A",
       wind_kph: "N/A",
       lat: 25.06999969,
-      lng: 121.55000305
+      lng: 121.55000305,
+      isOpen: false
     },
     {//hsin-chu
       cityName:"Hsin-chu",
       temp_c: "N/A",
       wind_kph: "N/A",
       lat: 24.79999924,
-      lng: 120.97000122
+      lng: 120.97000122,
+      isOpen: false
     }
   ];
 
@@ -45,7 +47,6 @@ export class AppComponent implements OnInit {
       data => {
         for(var i = 0; i < this.citys.length; i++)
         {
-
           if(this.citys[i].cityName == location)
           {
             console.log(this.citys[i].cityName);
@@ -75,9 +76,18 @@ export class AppComponent implements OnInit {
           temp_c: temp_c,
           wind_kph: wind_kph,
           lat: $event.coords.lat,
-          lng: $event.coords.lng
+          lng: $event.coords.lng,
+          isOpen: false
         });
       }
     );
+  }
+
+  markerHover($event: MouseEvent, index: number) {
+    this.citys[index].isOpen = true;
+  }
+
+  markerLeave($event: MouseEvent, index: number) {
+    this.citys[index].isOpen = false;
   }
 }
