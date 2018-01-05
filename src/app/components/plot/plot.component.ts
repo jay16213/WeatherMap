@@ -39,8 +39,16 @@ export class PlotComponent implements OnInit {
 
       this.weatherService.getHourlyTempHistory(this.cityName).subscribe(
         data => {
-          for(var i = 0; i < data.length; i++)
-            this.currentTempList.push(data[i].temp);
+          var last = new Date().getHours();
+          for(var i = data.length - 1; i >= 0; i--)
+          {
+            if(data[i].hour == last)
+            {
+              this.currentTempList.push(data[i].temp);
+              last--;
+              if(last < 0) last = 23;
+            }
+          }
 
           console.log(this.currentTempList);
           this.basicChart(this.current.nativeElement, "previous 24HR Temperture", this.currentTempList);
