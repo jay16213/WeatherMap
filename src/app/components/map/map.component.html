@@ -1,15 +1,19 @@
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="mapLat" [longitude]="mapLng" (mapClick)="mapClicked($event)">
-  <agm-marker *ngFor="let m of citys; let i = index"
-    (mouseOver)="markerHover($event, i)" (mouseOut)="markerLeave($event, i)"
-    (markerClick)="markerClicked($event, m.cityName)"
-    [latitude]="m.lat" [longitude]="m.lng">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <agm-map [latitude]="mapLat" [longitude]="mapLng" (mapClick)="mapClicked($event)">
+        <agm-marker *ngFor="let m of citys; let i = index"
+          (mouseOver)="markerHover($event, i)" (mouseOut)="markerLeave($event, i)"
+          (markerClick)="markerClicked($event, m.cityName)"
+          [latitude]="m.lat" [longitude]="m.lng">
 
-    <agm-info-window [isOpen]="m.isOpen">
-      <h2>{{m.cityName}}</h2>
-      <p>Temp: {{m.temp_c}} &deg;C</p>
-      <p>Wind speed: {{m.wind_kph}} km/h</p>
-    </agm-info-window>
-  </agm-marker>
-</agm-map>
+          <agm-info-window [isOpen]="m.isOpen">
+            <h2>{{m.cityName}}</h2>
+            <p>Temp: {{m.temp_c}} &deg;C</p>
+            <p>Wind speed: {{m.wind_kph}} km/h</p>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+  </div>
+  </div>
+</div>
