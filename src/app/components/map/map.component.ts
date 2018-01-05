@@ -24,44 +24,25 @@ export class MapComponent implements OnInit {
   mapLng: number = 121.0;
   time = new Date();
 
-  citys: any[] = [
-    {//taipei
-      cityName:"Taipei",
-      temp_c: "N/A",
-      wind_kph: "N/A",
-      lat: 25.06999969,
-      lng: 121.55000305,
-      isOpen: false
-    },
-    {//hsin-chu
-      cityName:"Hsin-chu",
-      temp_c: "N/A",
-      wind_kph: "N/A",
-      lat: 24.79999924,
-      lng: 120.97000122,
-      isOpen: false
-    }
-  ];
+  citys: any[] = [];
 
   ngOnInit() {
-    this.getCurreentConditions("Taipei");
-    this.getCurreentConditions("Hsin-chu");
+    this.citys = this.weatherService.getCityList();
+    console.log(this.citys.length);
+    for(var i = 0; i < this.citys.length; i++) {
+      this.citys[i].isOpen = false;
+      this.getCurreentConditions(i, this.citys[i].cityName);
+    }
   }
 
-  getCurreentConditions(location: string)
+  getCurreentConditions(index: number, location: string)
   {
     this.weatherService.getCurreentConditions(location).subscribe(
       data => {
-        for(var i = 0; i < this.citys.length; i++)
-        {
-          if(this.citys[i].cityName == location)
-          {
-            console.log(this.citys[i].cityName);
-            this.citys[i].temp_c = data['current_observation']['temp_c'];
-            this.citys[i].wind_kph = data['current_observation']['wind_kph'];
-            //this.uploadCurrentTemp('/current/' + this.citys[i].cityName, {hour: t.getHours(), temp: this.citys[i].temp_c});
-          }
-        }
+        console.log(this.citys[index].cityName);
+        this.citys[index].temp_c = data['current_observation']['temp_c'];
+        this.citys[index].wind_kph = data['current_observation']['wind_kph'];
+        this.weatherService.updateCityData(this.citys);
       }
     )
   }
@@ -92,7 +73,14 @@ export class MapComponent implements OnInit {
           isOpen: false
         });
 
-        this.weatherService.addNewCity(cityName);
+        this.weatherService.addNewCity({
+          cityName: cityName,
+          temp_c: temp_c,
+          wind_kph: wind_kph,
+          lat: $event.coords.lat,
+          lng: $event.coords.lng,
+          isOpen: false
+        });
       }
     );
   }
