@@ -6,8 +6,8 @@ import { PlotComponent } from './components/plot/plot.component';
 import { MapComponent } from './components/map/map.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: "map/" , pathMatch: 'full' },
-  { path: 'map/', component: MapComponent },
+  { path: '', redirectTo: "map" , pathMatch: 'full' },
+  { path: 'map', component: MapComponent },
   { path: 'plot/:name', component: PlotComponent }
 ];
 

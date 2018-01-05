@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 import { WeatherService } from '../../services/weather.service';
 import { Weather } from '../../models/weather';
 import { Console } from '@angular/core/src/console';
@@ -14,7 +14,10 @@ import { MouseEvent } from '@agm/core';
 })
 export class MapComponent implements OnInit {
 
-  constructor(private weatherService: WeatherService, private router: Router) {}
+  constructor(
+    private weatherService: WeatherService,
+    private router: Router,
+    private db: AngularFireDatabase) {}
 
   title = 'Weather app';
   mapLat: number = 23.5;
@@ -55,10 +58,15 @@ export class MapComponent implements OnInit {
             console.log(this.citys[i].cityName);
             this.citys[i].temp_c = data['current_observation']['temp_c'];
             this.citys[i].wind_kph = data['current_observation']['wind_kph'];
+            this.uploadCurrentTemp('/current/' + this.citys[i].cityName, this.citys[i].temp_c);
           }
         }
       }
     )
+  }
+
+  uploadCurrentTemp(listPath: string, data: any) {
+    this.db.database.ref().child(listPath).push(data);
   }
 
   mapClicked($event: MouseEvent) {
