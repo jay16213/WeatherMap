@@ -2,9 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 
-## Development server
+# API Usage
+- [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/?hl=zh_TW)
+- [Firebase](https://firebase.google.com/)
+- [Weather Underground API](https://www.wunderground.com/weather/api)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Development server
+- git clone and enter the project folder
+- run `npm install`
+- run `ng serve`
+- Navigate to `http://localhost:4200`
 
 ## Code scaffolding
 
