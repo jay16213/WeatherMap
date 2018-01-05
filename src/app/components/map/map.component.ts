@@ -22,6 +22,7 @@ export class MapComponent implements OnInit {
   title = 'Weather app';
   mapLat: number = 23.5;
   mapLng: number = 121.0;
+  time = new Date();
 
   citys: any[] = [
     {//taipei
@@ -58,7 +59,7 @@ export class MapComponent implements OnInit {
             console.log(this.citys[i].cityName);
             this.citys[i].temp_c = data['current_observation']['temp_c'];
             this.citys[i].wind_kph = data['current_observation']['wind_kph'];
-            this.uploadCurrentTemp('/current/' + this.citys[i].cityName, this.citys[i].temp_c);
+            //this.uploadCurrentTemp('/current/' + this.citys[i].cityName, {hour: t.getHours(), temp: this.citys[i].temp_c});
           }
         }
       }
@@ -90,6 +91,8 @@ export class MapComponent implements OnInit {
           lng: $event.coords.lng,
           isOpen: false
         });
+
+        this.weatherService.addNewCity(cityName);
       }
     );
   }
