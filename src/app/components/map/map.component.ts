@@ -22,6 +22,7 @@ export class MapComponent implements OnInit {
   title = 'Weather app';
   mapLat: number = 23.5;
   mapLng: number = 121.0;
+  zoom: number = 8;
   time = new Date();
 
   citys: any[] = [];
@@ -31,13 +32,13 @@ export class MapComponent implements OnInit {
     console.log(this.citys.length);
     for(var i = 0; i < this.citys.length; i++) {
       this.citys[i].isOpen = false;
-      this.getCurreentConditions(i, this.citys[i].cityName);
+      this.getCurreentConditions(i, this.citys[i].lat, this.citys[i].lng);
     }
   }
 
-  getCurreentConditions(index: number, location: string)
+  getCurreentConditions(index: number, lat: number, lng: number)
   {
-    this.weatherService.getCurreentConditions(location).subscribe(
+    this.weatherService.getCurreentConditions(lat, lng).subscribe(
       data => {
         console.log(this.citys[index].cityName);
         this.citys[index].temp_c = data['current_observation']['temp_c'];

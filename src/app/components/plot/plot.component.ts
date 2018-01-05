@@ -19,6 +19,8 @@ export class PlotComponent implements OnInit {
   tempObservable: Observable<any[]>;
 
   cityName: string;
+  lat: number;
+  lng: number;
   currentTempList: any[] = [];
   predictTempList: any[] = [];
 
@@ -31,6 +33,9 @@ export class PlotComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.cityName = params['name'];
+      var data = this.weatherService.getCity(this.cityName);
+      this.lat = data.lat;
+      this.lng = data.lng;
 
       this.weatherService.getHourlyTempHistory(this.cityName).subscribe(
         data => {
@@ -42,7 +47,7 @@ export class PlotComponent implements OnInit {
         }
       );
 
-      this.weatherService.getHourlyConditions(this.cityName).subscribe(
+      this.weatherService.getHourlyConditions(this.lat, this.lng).subscribe(
         data => {
           for(var i = 0; i < 24; i++)
           {

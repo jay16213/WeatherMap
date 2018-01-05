@@ -1,7 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
+  <a class="navbar-brand" href="/">Weather Map</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="mapLat=23.5; mapLng=121.0; zoom=8">Taiwan <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="mapLat=36.35052700542763; mapLng=-100.0634765625; zoom=5">America</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <agm-map [latitude]="mapLat" [longitude]="mapLng" (mapClick)="mapClicked($event)">
+      <agm-map [latitude]="mapLat" [longitude]="mapLng" [zoom]="zoom" (mapClick)="mapClicked($event)">
         <agm-marker *ngFor="let m of citys; let i = index"
           (mouseOver)="markerHover($event, i)" (mouseOut)="markerLeave($event, i)"
           (markerClick)="markerClicked($event, m.cityName)"
@@ -14,6 +32,6 @@
           </agm-info-window>
         </agm-marker>
       </agm-map>
-  </div>
+    </div>
   </div>
 </div>
