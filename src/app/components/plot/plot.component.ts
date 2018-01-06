@@ -39,15 +39,10 @@ export class PlotComponent implements OnInit {
 
       this.weatherService.getHourlyTempHistory(this.cityName).subscribe(
         data => {
-          var last = new Date().getHours();
-          for(var i = data.length - 1; i >= 0; i--)
-          {
-            if(data[i].hour == last)
-            {
+          var count = 0;
+          for(var i = data.length - 1; i >= 0 && count < 24; i--) {
               this.currentTempList.push(data[i].temp);
-              last--;
-              if(last < 0) last = 23;
-            }
+              count++;
           }
 
           console.log(this.currentTempList);
