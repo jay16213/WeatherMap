@@ -20,8 +20,8 @@ export class MapComponent implements OnInit {
     private db: AngularFireDatabase) {}
 
   title = 'Weather app';
-  mapLat: number = 23.5;
-  mapLng: number = 121.0;
+  mapLat: number = 24.5;
+  mapLng: number = 121.5;
   zoom: number = 8;
   time = new Date();
 
