@@ -14,10 +14,7 @@ export interface Weather {
 
 @Injectable()
 export class WeatherService {
-  API_KEY: string = "YOUR_API_KEY";
-  API_URL: string = "https://api.wunderground.com/api/" + this.API_KEY;
-
-  GOOGLE_API_KEY: string = "YOUR_API_KEY";
+  WU_API_URL: string = environment.WU_API_PREFIX + environment.WU_API_KEY;
 
   citys: any[] = [
     {//taipei
@@ -94,7 +91,7 @@ export class WeatherService {
         lat: data.lat,
         lng: data.lng
       });
-      
+
       this.uploadCurrentTemp(data.cityName, data.lat, data.lng);//first upload
       Observable.interval(1000*10).subscribe(() => {
         console.log("update current");
@@ -104,7 +101,7 @@ export class WeatherService {
   }
 
   getCurreentConditions(lat: number, lng: number): any {
-    return this.http.get(`${this.API_URL}/geolookup/conditions/q/${lat},${lng}.json`);
+    return this.http.get(`${this.WU_API_URL}/geolookup/conditions/q/${lat},${lng}.json`);
   }
 
   uploadCurrentTemp(cityName: string, lat: number, lng: number) {
@@ -118,7 +115,7 @@ export class WeatherService {
   }
 
   getGeoConditions(lat: number, lng: number): any {
-    return this.http.get(`${this.API_URL}/geolookup/conditions/q/${lat},${lng}.json`);
+    return this.http.get(`${this.WU_API_URL}/geolookup/conditions/q/${lat},${lng}.json`);
   }
 
   getHourlyTempHistory(location: string): Observable<any[]> {
@@ -126,12 +123,8 @@ export class WeatherService {
   }
 
   getHourlyConditions(lat: number, lng: number): any {
-    console.log(`${this.API_URL}/geolookup/hourly/q/${lat},${lng}.json`);
-    return this.http.get(`${this.API_URL}/geolookup/hourly/q/${lat},${lng}.json`);
-  }
-
-  getAddress(lat: number, lng: number): any {
-    return this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${this.GOOGLE_API_KEY}`);
+    console.log(`${this.WU_API_URL}/geolookup/hourly/q/${lat},${lng}.json`);
+    return this.http.get(`${this.WU_API_URL}/geolookup/hourly/q/${lat},${lng}.json`);
   }
 
   private handleError(error: Response) {
