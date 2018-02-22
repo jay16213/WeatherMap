@@ -28,10 +28,10 @@ import { environment } from '../environments/environment';
     HttpModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_API_KEY',
+      apiKey: environment.GOOGLE_MAP_API_KEY,
       language: 'zh-TW'
     }),
-    AngularFireModule.initializeApp(environment.firebase, "YOUR_PROJECT_NAME"),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AppRoutingModule
