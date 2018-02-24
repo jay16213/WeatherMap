@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
 
-# Development
+## Development
 - git clone and enter the project folder
 - run `npm install`
 - set up project(see following).
@@ -10,13 +10,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Navigate to `http://localhost:4200`
 
 
-# API Usage
+## API Usage
 - [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/?hl=zh_TW)
 - [Firebase](https://firebase.google.com/)
 - [Weather Underground API](https://www.wunderground.com/weather/api)
 
 
-# Project Set Up
+## Project Set Up
 In this project, you will use 3 API which mentioned above. You need to get the API KEY from their website first.
 
 After you get your api key, go to `src/environments/`, edit **environment.ts** and **environment.prod.ts**, you will see the contents:
